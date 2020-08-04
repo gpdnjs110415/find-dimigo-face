@@ -1,0 +1,142 @@
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>👨‍🏫디미고 닮은꼴 선생님 찾기👩‍🏫</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        window.console = window.console || function (t) { };
+    </script>
+    <script>
+        if (document.location.search.match(/type=embed/gi)) {
+            window.parent.postMessage("resize", "*");
+        }
+    </script>
+</head>
+
+<body translate="no">
+    <header>
+        <div id="header">
+            <img id="dimigo-logo" src="/image/dimigo.png" id="dimigo-icon">
+            <p class="text-pink">디미고</p>
+            <p>닮은꼴 선생님 찾기</p>
+        </div>
+    </header>
+
+
+    <div id="container-container">
+
+        <div class="container">
+            <div class="avatar-upload">
+                <div class="avatar-edit">
+                    <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+                </div>
+
+                <div class="avatar-preview" onclick='imageUpload.click();'>
+                    <img class="file-upload-image" id="profile-image" src="/image/whoteacher.png" alt="your image"
+                        style="display:none;" />
+                    <div id="imagePreview">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-dark" onclick='imageUpload.click();'>내 사진 업로드하기</button>
+        </div>
+
+        <div class="input-group">
+            <div class="result-text">
+                <div id="label-container" style="text-align:center;width:100%;"></div>
+            </div>
+            <img id="arrow" src="/image/arrow.png" alt="">
+
+        </div>
+
+        <div id="result-img">
+            <img id="who-teacher" src="/image/whoteacher.png" alt="">
+        </div>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+
+    <script
+        src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        // More API functions here:
+        // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+        // the link to your model provided by Teachable Machine export panel
+        const URL = "./my_model/";
+        let model, webcam, labelContainer, maxPredictions;
+        // Load the image model and setup the webcam
+        async function init() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+            // load the model and metadata
+            // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+            // or files from your local hard drive
+            // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+            // Convenience function to setup a webcam
+            labelContainer = document.getElementById("label-container");
+            for (let i = 0; i < maxPredictions; i++) { // and class labels
+                labelContainer.appendChild(document.createElement("div"));
+            }
+        }
+        // run the webcam image through the image model
+        async function predict() {
+            // predict can take in an image, video or canvas html element
+            var image = document.getElementById("profile-image");
+            const prediction = await model.predict(image, false);
+            for (let i = 0; i < maxPredictions; i++) {
+                var classPrediction = "";
+                if (prediction[i].probability >= 0.3) {
+                    classPrediction = '<div style="margin:10px;">' + '당신은 <br>' + prediction[i].className + ' 선생님과' + '<br>' + prediction[i].probability.toFixed(4) * 100.0 + '% 닮았습니다!';
+
+                }
+
+                labelContainer.childNodes[i].innerHTML = classPrediction;
+
+            }
+        }
+    </script>
+    <script id="rendered-js">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.file-upload-image').attr('src', e.target.result);
+                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+                };
+                reader.readAsDataURL(input.files[0]);
+                init().then(() => {
+                    console.log('hello');
+                    predict();
+                });
+            }
+        }
+        $("#imageUpload").change(function () {
+            readURL(this);
+        });
+            //# sourceURL=pen.js
+    </script>
+
+</body>
+
+</html>
