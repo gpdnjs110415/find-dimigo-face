@@ -1,4 +1,4 @@
-*{
+*, body{
     width: 100%;
     font-family:'ImcreSoojin';
     font-size:1.5rem;
@@ -16,6 +16,8 @@ p{
 }
 
 #header{
+    width: 100%;
+    font-size: 2rem;
     box-shadow: 0 0px 20px rgba(0, 0, 0, 0.527);
     height: fit-content;
     background-color: white;
@@ -23,16 +25,39 @@ p{
     display:flex;
     justify-content:center;
 }
+
+#footer{
+    letter-spacing: 3px;
+    width: 100%;
+    padding: 100px 0px;
+    margin-top:60px;
+    text-align: center;
+    color: rgb(197, 197, 197);
+    font-size:0.8rem;
+}
+
 #dimigo-logo{
     margin-left: 15px;
     width: 1.7rem;
     height: 1.7rem;
 }
 
+
 #result-img{
     width:fit-content;
+    border-radius: 100%;
     padding: 0;
     margin: 0;
+}
+#result-img img {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 100%;
+    border: 6px solid #F8F8F8;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.623);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #who-teacher, #who-user{
@@ -69,6 +94,10 @@ button{
     width:15rem;
     padding-top: 10px;
     padding-left: 30px;
+}
+
+#label-container{
+    font-size:1rem;
 }
 
 .container {

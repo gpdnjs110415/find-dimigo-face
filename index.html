@@ -19,7 +19,7 @@
 <body translate="no">
     <header>
         <div id="header">
-            <img id="dimigo-logo" src="/image/dimigo.png" id="dimigo-icon">
+            <img id="dimigo-logo" src="./image/dimigo.png" id="dimigo-icon">
             <p class="text-pink">디미고</p>
             <p>닮은꼴 선생님 찾기</p>
         </div>
@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="avatar-preview" onclick='imageUpload.click();'>
-                    <img class="file-upload-image" id="profile-image" src="/image/whoteacher.png" alt="your image"
+                    <img class="file-upload-image" id="profile-image" src="./image/whoteacher.png" alt="your image"
                         style="display:none;" />
                     <div id="imagePreview">
                     </div>
@@ -48,15 +48,23 @@
             <div class="result-text">
                 <div id="label-container" style="text-align:center;width:100%;"></div>
             </div>
-            <img id="arrow" src="/image/arrow.png" alt="">
+            <img id="arrow" src="./image/arrow.png" alt="">
 
         </div>
 
         <div id="result-img">
-            <img id="who-teacher" src="/image/whoteacher.png" alt="">
+            <img id="who-teacher" src="./image/whoteacher.png" alt="">
         </div>
 
     </div>
+
+
+    <footer>
+        <div id="footer">
+            @KDMHS 18 WP 이혜원<br>사진 보내주신 모든분들께 감사드립니다!<br>자료 부족으로 사진이 뜨지 않을 수도 있습니다.
+        </div>
+    </footer>
+
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -101,12 +109,20 @@
         async function predict() {
             // predict can take in an image, video or canvas html element
             var image = document.getElementById("profile-image");
+            var teacherImage = document.getElementById("who-teacher");
             const prediction = await model.predict(image, false);
             for (let i = 0; i < maxPredictions; i++) {
                 var classPrediction = "";
                 if (prediction[i].probability >= 0.3) {
-                    classPrediction = '<div style="margin:10px;">' + '당신은 <br>' + prediction[i].className + ' 선생님과' + '<br>' + prediction[i].probability.toFixed(4) * 100.0 + '% 닮았습니다!';
-
+                    if (prediction[i].className == '이사장님') {
+                        classPrediction = '<div style="margin:10px;font-size:1.3rem;">' + '당신은 <br>' + prediction[i].className + '과' + '<br>' + prediction[i].probability.toFixed(4) * 100.0 + '% 닮았습니다!';
+                    } else if (prediction[i].className == '사무국장') {
+                        classPrediction = '<div style="margin:10px;font-size:1.3rem;">' + '당신은 <br>' + prediction[i].className + '과' + '<br>' + prediction[i].probability.toFixed(4) * 100.0 + '% 닮았습니다!';
+                    }
+                    else {
+                        classPrediction = '<div style="margin:10px;font-size:1.3rem;">' + '당신은 <br>' + prediction[i].className + ' 선생님과' + '<br>' + prediction[i].probability.toFixed(4) * 100.0 + '% 닮았습니다!';
+                    }
+                    teacherImage.src = "./image/" + prediction[i].className + ".png";
                 }
 
                 labelContainer.childNodes[i].innerHTML = classPrediction;
