@@ -261,6 +261,117 @@ button{
 
 }
 
+@media ( max-width: 420px ){
+    #header p{
+        font-size: 1.2rem;
+        height:fit-content;
+    }
+
+    #dimigo-logo{
+        margin: 0px;
+        width:1.3rem;
+        height: 1.3rem;
+    }
+
+    #header{
+        background-color: white;
+        padding: 15px 0px;
+        margin: 0px;
+    }
+
+    .container{
+        margin-top: 20px;
+    }
+
+    .avatar-upload .avatar-preview {
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .avatar-upload {
+        position: relative;
+        width: 10rem;
+        margin: 50px auto;
+    }
+
+    #result-img img {
+        width: 10rem;
+        height: 10rem;
+    }
+    
+    #who-teacher, #who-user{
+        width: 10rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    button{
+        font-size: 1rem;
+        padding: 20px 30px;
+        width: 13rem;
+    }
+
+    #footer{
+        font-size: 0.5rem;
+        padding: 50px 0px;
+        margin-top:0px;
+    }
+
+}
+
+@media ( max-width:375px ){
+    #header p{
+        font-size: 1rem;
+    }
+    #header{
+        background-color: white;
+        padding: 20px 0px;
+    }
+
+    #container-container{
+        margin-bottom: 50px;
+    }
+
+    #dimigo-logo{
+        margin: 0px;
+        width:1rem;
+        height: 1rem;
+    }
+
+    .avatar-upload .avatar-preview {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    .avatar-upload {
+        position: relative;
+        width: 6rem;
+        margin: 50px auto;
+    }
+    #result-img img {
+        width: 6rem;
+        height: 6rem;
+    }
+    
+    #who-teacher, #who-user{
+        width: 6rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    button{
+        font-size: 0.5rem;
+        padding: 15px 30px;
+        width: 10rem;
+    }
+
+    #footer{
+        font-size: 0.3rem;
+        padding: 50px 0px;
+        margin-top:0px;
+    }
+}
+
 @font-face {
     font-family: 'ImcreSoojin';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff')
