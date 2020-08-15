@@ -25,18 +25,20 @@ async function predict() {
     var image = document.getElementById("profile-image");
     var teacherImage = document.getElementById("who-teacher");
     const prediction = await model.predict(image, false);
+    var count = 0;
     for (let i = 0; i < maxPredictions; i++) {
         var classPrediction = "";
         if (prediction[i].probability >= 0.3) {
             if (prediction[i].className == '이사장님') {
-                classPrediction = '<div style="margin:10px;font-size:1.3rem;">' + '당신은 <br>' + prediction[i].className + '과' + '<br>' + prediction[i].probability.toFixed(4) * 100.0 + '% 닮았습니다!';
+                classPrediction = '<div style="margin:10px;font-size:1.3rem;">' + '당신은 <br>' + Math.round(prediction[i].className) + '과' + '<br>' + prediction[i].probability.toFixed(4) * 100.0 + '% 닮았습니다!';
 
             } else if (prediction[i].className == '사무국장') {
-                classPrediction = '<div style="margin:10px;font-size:1.3rem;">' + '당신은 <br>' + prediction[i].className + '과' + '<br>' + prediction[i].probability.toFixed(4) * 100.0 + '% 닮았습니다!';
+                classPrediction = '<div style="margin:10px;font-size:1.3rem;">' + '당신은 <br>' + Math.round(prediction[i].className) + '과' + '<br>' + prediction[i].probability.toFixed(4) * 100.0 + '% 닮았습니다!';
             }
             else {
-                classPrediction = '<div style="margin:10px;font-size:1.3rem;">' + '당신은 <br>' + prediction[i].className + ' 선생님과' + '<br>' + prediction[i].probability.toFixed(4) * 100.0 + '% 닮았습니다!';
+                classPrediction = '<div style="margin:10px;font-size:1.3rem;">' + '당신은 <br>' + Math.round(prediction[i].className) + ' 선생님과' + '<br>' + prediction[i].probability.toFixed(4) * 100.0 + '% 닮았습니다!';
             }
+            count++;
             document.getElementById('loading').src = './image/arrow.png';
             document.getElementById('loading').id = 'arrow';
             teacherImage.src = "./image/" + prediction[i].className + ".png";
@@ -45,9 +47,13 @@ async function predict() {
             document.getElementById('btn').setAttribute('onclick', 'reset();');
 
         }
-
-        labelContainer.childNodes[i].innerHTML = classPrediction;
+        if (count == 0) {
+            labelContainer.innerHTML = '검색할 수 없습니다!<br>다른 이미지를 업로드해주세요😂';
+        } else {
+            labelContainer.childNodes[i].innerHTML = classPrediction;
+        }
     }
+
 
 
 }

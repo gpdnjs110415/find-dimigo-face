@@ -5,6 +5,28 @@
     margin: 0;
     padding: 0;
 }
+#sharetext{
+    color: gray;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+}
+.sharebtn_custom{
+    border-radius:0.3rem;
+}
+
+#share-container{
+    right: 10px;
+    bottom: 10px;
+    position: fixed;
+    width:fit-content;
+    height: 4rem;
+    padding: 30px;
+    padding-bottom:0px;
+    background-color:white;
+    border-radius: 2rem;
+    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.527);
+}
 
 a{
     text-decoration: none;
