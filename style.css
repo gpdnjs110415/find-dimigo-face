@@ -6,6 +6,14 @@
     padding: 0;
 }
 
+a{
+    text-decoration: none;
+}
+
+#testbtn{
+    position:absolute;
+}
+
 p{
     width: fit-content;
     padding-left:15px;
@@ -66,12 +74,14 @@ p{
     padding: 0;
 }
 
+
 body {
     background: whitesmoke;
     font-family: 'ImcreSoojin', sans-serif;
 }
 
 button{
+    user-select:none;
     font-size: 1rem;
     margin-top: 30px;
     text-decoration: none;
@@ -92,8 +102,11 @@ button{
 
 #arrow{
     width:15rem;
-    padding-top: 10px;
-    padding-left: 30px;
+    padding: 0rem 4rem;
+}
+#loading{
+    width:5rem;
+    padding: 4rem 9rem;
 }
 
 #label-container{
@@ -101,7 +114,7 @@ button{
 }
 
 .container {
-    margin-top: 5rem;
+    margin-top: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -240,6 +253,9 @@ button{
 }
 
 @media ( max-width: 1278px ) {
+
+    
+
     #container-container{
         display: flex;
         flex-direction: column;
@@ -262,6 +278,7 @@ button{
 }
 
 @media ( max-width: 420px ){
+
     #header p{
         font-size: 1.2rem;
         height:fit-content;
